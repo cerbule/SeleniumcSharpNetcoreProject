@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using SeleniumCSharpNetCore.pages;
 
 namespace SeleniumCSharpNetCore
 {
@@ -23,6 +24,7 @@ namespace SeleniumCSharpNetCore
 			Driver.Quit();
 		}
 
+		/*
 		[Test]
 		public void Test1()
 		{
@@ -37,6 +39,25 @@ namespace SeleniumCSharpNetCore
 
 
 			Assert.Pass();
+		}
+		*/
+
+		[Test]
+		public void LoginTest()
+		{
+
+			Driver.Navigate().GoToUrl("http://eaapp.somee.com/");
+
+			HomePage homePage = new HomePage();
+			LoginPage loginPage = new LoginPage();
+
+			homePage.clickLogin();
+			loginPage.enterUserNameAndPassword("admin", "password");
+			loginPage.clickOnLoginButton();
+
+			Assert.That(homePage.isLogoffExist, Is.True, "ERROR :: Log off link does not exist");
+
+
 		}
 	}
 }
